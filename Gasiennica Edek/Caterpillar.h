@@ -3,16 +3,6 @@
 class Map;
 class Caterpillar
 {
-public:
-	Caterpillar();
-	Caterpillar(int x, int w, int h, Map *m);
-	~Caterpillar();
-
-	void addSegment(char content = ' ');
-	int move(char x);
-	int getX();
-	int getY();
-
 private:
 	int segmentQ;
 	Map *map;
@@ -33,5 +23,16 @@ private:
 
 	segment *segments;
 	segment *curr;
+
+public:
+	Caterpillar();
+	Caterpillar(int x, int w, int h, Map *m);
+	~Caterpillar();
+
+	void addSegment(segment *head);
+	int move(char x);
+	int getX();
+	int getY();
+
 };
 

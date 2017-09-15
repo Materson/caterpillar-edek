@@ -11,10 +11,10 @@ Caterpillar::Caterpillar(int x, int w, int h, Map *m)
 	pos.x = 0;
 	pos.y = 0;
 	segments = new segment;
-	segments->next = NULL;
-	for (int i = 0; i < x; i++)
+	segments->next = segments;
+	for (int i = 1; i < x; i++)
 	{
-		addSegment();
+		addSegment(segments);
 	}
 	curr = segments->next;
 }
@@ -24,18 +24,12 @@ Caterpillar::~Caterpillar()
 {
 }
 
-void Caterpillar::addSegment(char content)
+void Caterpillar::addSegment(segment *head)
 {
 	segment *n = new segment;
-	n->content = content;
-	n->next = NULL;
-	segment * tmp;
-	tmp = this->segments;
-	while (tmp->next != NULL)
-	{
-		tmp = tmp->next;
-	}
-	tmp->next = n;
+	n->content = ' ';
+	n->next = head->next;
+	head->next = n;
 }
 
 int Caterpillar::move(char x)
