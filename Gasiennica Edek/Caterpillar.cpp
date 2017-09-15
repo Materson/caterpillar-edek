@@ -10,6 +10,8 @@ Caterpillar::Caterpillar(int x, int w, int h, Map *m)
 {
 	segments = new segment;
 	segments->next = NULL;
+	pos.x = 0;
+	pos.y = 0;
 	for (int i = 0; i < x; i++)
 	{
 		addSegment();
