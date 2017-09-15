@@ -6,19 +6,13 @@ using namespace std;
 
 int main()
 {
-	int x, y;
-	cout << "Podaj szerokosc i wysokosc mapy"<<endl;
-	cin >> x;
-	cin >> y;
+	int x, y, z;
+	scanf_s("%d %d %d", &x, &y, &z);
 
-	Map *map = new Map(x, y);
+	Map *map = new Map(x, y, z);
+	map->round();
+	map->printEdekPosition();
 	map->show();
-
-	cin >> x;
-
-	Caterpillar *Edek = new Caterpillar(x);
-
-	cin >> x;
 
     return 0;
 }
