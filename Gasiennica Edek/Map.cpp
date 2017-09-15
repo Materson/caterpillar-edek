@@ -127,3 +127,8 @@ void Map::printEdekPosition()
 {
 	printf_s("%d %d \n", Edek->getX(), Edek->getY());
 }
+
+void Map::paint(int x, int y, char c)
+{
+	area[h*y + x] = c;
+}

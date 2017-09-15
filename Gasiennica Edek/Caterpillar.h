@@ -32,5 +32,6 @@ private:
 	};
 
 	segment *segments;
+	segment *curr;
 };
 

@@ -14,6 +14,7 @@ public:
 	int getH();
 	char checkPlace(int x, int y);
 	void printEdekPosition();
+	void paint(int x, int y, char c);
 private:
 	int w, h;
 	char *area;
