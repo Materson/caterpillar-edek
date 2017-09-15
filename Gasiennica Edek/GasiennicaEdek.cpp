@@ -1,7 +1,6 @@
-// GasiennicaEdek.cpp: Definiuje punkt wejścia dla aplikacji konsolowej.
-//
 #include<iostream>
 #include"Map.h"
+#include"Caterpillar.h"
 
 using namespace std;
 
@@ -15,6 +14,11 @@ int main()
 	Map *map = new Map(x, y);
 	map->show();
 
+	cin >> x;
+
+	Caterpillar *Edek = new Caterpillar(x);
+
+	cin >> x;
 
     return 0;
 }

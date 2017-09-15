@@ -146,10 +146,12 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Caterpillar.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Caterpillar.cpp" />
     <ClCompile Include="GasiennicaEdek.cpp" />
     <ClCompile Include="Map.cpp" />
   </ItemGroup>
