@@ -30,7 +30,7 @@ public:
 	~Caterpillar();
 
 	void addSegment(segment *head);
-	void delSegment();
+	void delSegment(segment *curr);
 	int move(char x);
 	int getX();
 	int getY();

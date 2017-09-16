@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-	long int x = 0, y = 0, z = 0;
+	int x = 0, y = 0, z = 0;
 	scanf_s("%d%d%d", &x, &y, &z);
 
 	Map *map = new Map(x, y, z);

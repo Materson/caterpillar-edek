@@ -6,13 +6,12 @@ Caterpillar::Caterpillar()
 }
 
 Caterpillar::Caterpillar(int x, int w, int h, Map *m)
-	:map(m)
+	:segmentQ(x), map(m)
 {
 	pos.x = 0;
 	pos.y = 0;
 	segments = new segment;
 	segments->next = segments;
-	segmentQ = 1;
 	for (int i = 1; i < x; i++)
 	{
 		addSegment(segments);
@@ -31,7 +30,6 @@ void Caterpillar::addSegment(segment *head)
 	n->content = ' ';
 	n->next = head->next;
 	head->next = n;
-	segmentQ++;
 }
 
 int Caterpillar::move(char x)
@@ -45,9 +43,9 @@ int Caterpillar::move(char x)
 		{
 			pos.y--;
 			mushroom(p);
-			if (p == 'K')
+			if (p = 'K')
 			{
-				//spike();
+				spike();
 			}
 			curr = curr->next;
 			colors(p);
@@ -59,9 +57,9 @@ int Caterpillar::move(char x)
 		{
 			pos.x++;
 			mushroom(p);
-			if (p == 'K')
+			if (p = 'K')
 			{
-				//spike();
+				spike();
 			}
 			curr = curr->next;
 			colors(p);
@@ -73,9 +71,9 @@ int Caterpillar::move(char x)
 		{
 			pos.y++;
 			mushroom(p);
-			if (p == 'K')
+			if (p = 'K')
 			{
-				//spike();
+				spike();
 			}
 			curr = curr->next;
 			colors(p);
@@ -87,9 +85,9 @@ int Caterpillar::move(char x)
 		{
 			pos.x--;
 			mushroom(p);
-			if (p == 'K')
+			if (p = 'K')
 			{
-				//spike();
+				spike();
 			}
 			curr = curr->next;
 			colors(p);
@@ -132,7 +130,7 @@ void Caterpillar::mushroom(char p)
 	}
 }
 
-void Caterpillar::delSegment()
+void Caterpillar::spike()
 {
 	segment *tmp = curr->next;
 	curr->next = curr->next->next;
