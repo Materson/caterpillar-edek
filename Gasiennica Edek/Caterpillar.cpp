@@ -16,7 +16,7 @@ Caterpillar::Caterpillar(int x, int w, int h, Map *m)
 	{
 		addSegment(segments);
 	}
-	curr = segments->next;
+	curr = segments;
 }
 
 
@@ -41,32 +41,36 @@ int Caterpillar::move(char x)
 		p = map->checkPlace(pos.x, pos.y - 1);
 		if (p != 'T')
 		{
-			if (p >= 'a' && p <= 'z')
-			{
-				
-			}
+			curr = curr->next;
 			pos.y--;
+			colors(p);
 		}
 		break;
 	case 'p':
 		p = map->checkPlace(pos.x + 1, pos.y);
 		if (p != 'T')
 		{
+			curr = curr->next;
 			pos.x++;
+			colors(p);
 		}
 		break;
 	case 'd':
 		p = map->checkPlace(pos.x, pos.y + 1);
 		if (p != 'T')
 		{
+			curr = curr->next;
 			pos.y++;
+			colors(p);
 		}
 		break;
 	case 'l':
 		p = map->checkPlace(pos.x - 1, pos.y);
 		if (p != 'T')
 		{
+			curr = curr->next;
 			pos.x--;
+			colors(p);
 		}
 		break;
 	}
@@ -81,4 +85,17 @@ int Caterpillar::getX()
 int Caterpillar::getY()
 {
 	return pos.y;
+}
+
+void Caterpillar::colors(char p)
+{
+	if (p >= 'a' && p <= 'z')
+	{
+		curr->content = p;
+	}
+
+	if (p == '.' && curr->content >= 'a' && curr->content <= 'z')
+	{
+		map->paint(pos.x, pos.y, curr->content);
+	}
 }

@@ -33,6 +33,7 @@ public:
 	int move(char x);
 	int getX();
 	int getY();
+	void colors(char p);
 
 };
 

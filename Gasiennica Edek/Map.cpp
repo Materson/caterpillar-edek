@@ -120,7 +120,7 @@ char Map::checkPlace(int x, int y)
 	{
 		return 'T';
 	}
-	return area[y*h + x];
+	return area[y*w + x];
 }
 
 void Map::printEdekPosition()
@@ -130,5 +130,5 @@ void Map::printEdekPosition()
 
 void Map::paint(int x, int y, char c)
 {
-	area[h*y + x] = c;
+	area[w*y + x] = c;
 }
