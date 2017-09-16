@@ -13,12 +13,12 @@ Map::Map(int x, int y, int z)
 	:w(x), h(y)
 {
 	int c = x*y;
-	/*if (x * y == 40000)
+	if (x * y == 40000)
 	{
 		c = 100;
 		w = 10;
 		h = 10;
-	}*/
+	}
 	area = new char[c];
 
 	char ch = ' ';
@@ -101,12 +101,20 @@ void Map::round()
 		{
 			for (int i = 0; i < k; i++)
 			{
-				Edek->move(ch);
+				if (Edek->move(ch)) //if 1 Edek die
+				{
+					printf_s("Zegnaj, okrutny swiecie!\n");
+					ch = '\n';
+				}
 			}
 		}
 		else
 		{
-			Edek->move(ch);
+			if (Edek->move(ch)) //if 1 Edek die
+			{
+				printf_s("Zegnaj, okrutny swiecie!\n");
+				ch = '\n';
+			}
 		}
 	}
 }

@@ -47,7 +47,12 @@ int Caterpillar::move(char x)
 			mushroom(p);
 			if (p == 'K')
 			{
-				//spike();
+				delSegment();
+				if (segmentQ == 0)
+				{
+					pos.y++;
+					return 1;
+				}
 			}
 			curr = curr->next;
 			colors(p);
@@ -61,7 +66,12 @@ int Caterpillar::move(char x)
 			mushroom(p);
 			if (p == 'K')
 			{
-				//spike();
+				delSegment();
+				if (segmentQ == 0)
+				{
+					pos.x--;
+					return 1;
+				}
 			}
 			curr = curr->next;
 			colors(p);
@@ -75,7 +85,12 @@ int Caterpillar::move(char x)
 			mushroom(p);
 			if (p == 'K')
 			{
-				//spike();
+				delSegment();
+				if (segmentQ == 0)
+				{
+					pos.y--;
+					return 1;
+				}
 			}
 			curr = curr->next;
 			colors(p);
@@ -89,7 +104,12 @@ int Caterpillar::move(char x)
 			mushroom(p);
 			if (p == 'K')
 			{
-				//spike();
+				delSegment();
+				if (segmentQ == 0)
+				{
+					pos.x++;
+					return 1;
+				}
 			}
 			curr = curr->next;
 			colors(p);
