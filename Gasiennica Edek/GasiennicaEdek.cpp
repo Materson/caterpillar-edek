@@ -9,6 +9,7 @@ int main()
 	int x = 0, y = 0, z = 0;
 	scanf_s("%d%d%d", &x, &y, &z);
 	Map map(x, y, z);
+	//map.show();
 	map.round();
 	map.printEdekPosition();
 	map.show();

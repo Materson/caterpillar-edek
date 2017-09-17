@@ -95,7 +95,7 @@ void Map::show()
 			}
 		}
 		printf_s("\n");
-		if (level->down != NULL)
+		if (level->y == i && level->down != NULL)
 		{
 			tmp = level->down;
 			level = level->down;
