@@ -13,6 +13,12 @@ Map::Map(int wid, int hei, int z)
 	:w(wid), h(hei)
 {
 	int c = wid*hei;
+	anchor = new field;
+	anchor->x = 0;
+	anchor->y = 0;
+	anchor->right = NULL;
+	anchor->down = NULL;
+	anchor->content = '.';
 
 	char ch = ' ';
 	int k = 0, x = 0, y = 0;
@@ -32,32 +38,33 @@ Map::Map(int wid, int hei, int z)
 		}
 		k /= 10;
 
-		if (ch != '.')
+		if (k > 0)
 		{
-
-			if (k > 0)
+			for (int j = 0; j < k; j++, i++)
 			{
-				for (int j = 0; j < k; j++, i++)
-				{
-					addField(x++, y, ch);
-					if (x == w)
-					{
-						y++;
-						x = 0;
-					}
-				}
-				i--;
-			}
-			else
-			{
-				addField(x++, y, ch);
+				if(ch != '.')
+					addField(x, y, ch);
+				x++;
 				if (x == w)
 				{
 					y++;
 					x = 0;
 				}
 			}
+			i--;
 		}
+		else
+		{
+			if (ch != '.')
+				addField(x, y, ch);
+				x++;
+			if (x == w)
+			{
+				y++;
+				x = 0;
+			}
+		}
+		
 
 	}
 
@@ -70,14 +77,28 @@ Map::~Map()
 
 void Map::show()
 {
-	for (int i = 0; i < w*h; i++)
+	field *tmp = anchor;
+	field *level = anchor;
+	for (int i = 0; i < h; i++)
 	{
-		
-		//printf_s("%c", area[i]);
-		
-		if ((i+1) % w == 0)
+		for (int j = 0; j < w; j++)
 		{
-			cout << endl;
+			if (tmp->x == j && tmp->y == i)
+			{
+				printf_s("%c", tmp->content);
+				if (tmp->right != NULL)
+					tmp = tmp->right;
+			}
+			else
+			{
+				printf_s(".");
+			}
+		}
+		printf_s("\n");
+		if (level->down != NULL)
+		{
+			tmp = level->down;
+			level = level->down;
 		}
 	}
 }
@@ -165,20 +186,12 @@ void Map::addField(int x, int y, char con)
 	newf->down = NULL;
 
 	field *tmp = anchor;
-	while ( tmp->down != NULL && tmp->down->y < y)
+	while ( tmp->down != NULL && tmp->down->y <= y)
 	{
 		tmp = tmp->down;
 	}
 
-	if (tmp->right == NULL)
-	{
-		if (tmp->down != NULL)
-		{
-			newf->down = tmp->down;
-		}
-		tmp->down = newf;
-	}
-	else
+	if (tmp->y == y)
 	{
 		while (tmp->right != NULL && tmp->right->x < x)
 		{
@@ -189,5 +202,13 @@ void Map::addField(int x, int y, char con)
 			newf->right = tmp->right;
 		}
 		tmp->right = newf;
+	}
+	else
+	{
+		if (tmp->down != NULL)
+		{
+			newf->down = tmp->down;
+		}
+		tmp->down = newf;
 	}
 }
