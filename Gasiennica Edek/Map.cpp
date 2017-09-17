@@ -13,12 +13,12 @@ Map::Map(int x, int y, int z)
 	:w(x), h(y)
 {
 	int c = x*y;
-	if (x * y == 40000)
+	/*if (x * y == 40000)
 	{
 		c = 100;
 		w = 10;
 		h = 10;
-	}
+	}*/
 	area = new char[c];
 
 	char ch = ' ';
