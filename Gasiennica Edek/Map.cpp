@@ -129,7 +129,7 @@ void Map::round()
 		{
 			for (int i = 0; i < k; i++)
 			{
-				if (Edek->move(ch)) //if 1 Edek die
+				if (Edek->move(ch)) //if TRUE Edek die
 				{
 					printf_s("Zegnaj, okrutny swiecie!\n");
 					ch = '\n';
@@ -138,7 +138,7 @@ void Map::round()
 		}
 		else
 		{
-			if (Edek->move(ch)) //if 1 Edek die
+			if (Edek->move(ch)) //if TRUE Edek die
 			{
 				printf_s("Zegnaj, okrutny swiecie!\n");
 				ch = '\n';
@@ -163,7 +163,13 @@ char Map::checkPlace(int x, int y)
 	{
 		return 'T';
 	}
-	return '2';
+	field *find = new field;
+	find->x = x;
+	find->y = y;
+	findField(find);
+	char c = find->content;
+	delete(find);
+	return c;
 }
 
 void Map::printEdekPosition()
@@ -211,4 +217,28 @@ void Map::addField(int x, int y, char con)
 		}
 		tmp->down = newf;
 	}
+}
+
+int Map::findField(field * find)
+{
+	find->content = '.';
+	field *tmp = anchor;
+	while (tmp->down != NULL && tmp->down->y <= find->y)
+	{
+		tmp = tmp->down;
+	}
+
+	if (tmp->y == find->y)
+	{
+		while (tmp->right != NULL && tmp->right->x <= find->x)
+		{
+			tmp = tmp->right;
+		}
+		if (tmp->x == find->x)
+		{
+			find->content = tmp->content;
+			return 1;
+		}
+	}
+	return 0;
 }
