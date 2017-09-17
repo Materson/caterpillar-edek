@@ -9,20 +9,13 @@ Map::Map()
 }
 
 
-Map::Map(int x, int y, int z)
-	:w(x), h(y)
+Map::Map(int wid, int hei, int z)
+	:w(wid), h(hei)
 {
-	int c = x*y;
-	/*if (x * y == 40000)
-	{
-		c = 100;
-		w = 10;
-		h = 10;
-	}*/
-	//area = new char[c];
+	int c = wid*hei;
 
 	char ch = ' ';
-	int k = 0;
+	int k = 0, x = 0, y = 0;
 	for (int i = 0; i < c; i++)
 	{
 		ch = ' ';
@@ -43,13 +36,23 @@ Map::Map(int x, int y, int z)
 		{
 			for (int j = 0; j < k; j++, i++)
 			{
-				//area[i] = ch;
+				addField(x++, y, ch);
+				if (x == w)
+				{
+					y++;
+					x = 0;
+				}
 			}
 			i--;
 		}
 		else
 		{
-			//area[i] = ch;
+			addField(x++, y, ch);
+			if (x == w)
+			{
+				y++;
+				x = 0;
+			}
 		}
 
 	}
