@@ -32,9 +32,23 @@ Map::Map(int wid, int hei, int z)
 		}
 		k /= 10;
 
-		if (k > 0)
+		if (ch != '.')
 		{
-			for (int j = 0; j < k; j++, i++)
+
+			if (k > 0)
+			{
+				for (int j = 0; j < k; j++, i++)
+				{
+					addField(x++, y, ch);
+					if (x == w)
+					{
+						y++;
+						x = 0;
+					}
+				}
+				i--;
+			}
+			else
 			{
 				addField(x++, y, ch);
 				if (x == w)
@@ -42,16 +56,6 @@ Map::Map(int wid, int hei, int z)
 					y++;
 					x = 0;
 				}
-			}
-			i--;
-		}
-		else
-		{
-			addField(x++, y, ch);
-			if (x == w)
-			{
-				y++;
-				x = 0;
 			}
 		}
 
