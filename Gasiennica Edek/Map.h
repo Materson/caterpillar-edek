@@ -29,7 +29,7 @@ public:
 	void printEdekPosition();
 	void paint(int x, int y, char c);
 	void addField(int x, int y, char con);
-	int findField(field *find);
+	void findField(field *find);
 
 
 };

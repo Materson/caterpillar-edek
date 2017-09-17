@@ -31,6 +31,7 @@ public:
 
 	void addSegment(segment *head);
 	void delSegment();
+	void printSegments();
 	int move(char x);
 	int getX();
 	int getY();

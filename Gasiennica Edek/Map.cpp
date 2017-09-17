@@ -166,6 +166,7 @@ char Map::checkPlace(int x, int y)
 	field *find = new field;
 	find->x = x;
 	find->y = y;
+	find->content = '.';
 	findField(find);
 	char c = find->content;
 	delete(find);
@@ -179,52 +180,78 @@ void Map::printEdekPosition()
 
 void Map::paint(int x, int y, char c)
 {
-	//area[w*y + x] = c;
+	field *find = new field;
+	find->x = x;
+	find->y = y;
+	find->content = c;
+	findField(find);
+	delete(find);
 }
 
 void Map::addField(int x, int y, char con)
 {
-	field *newf = new field;
-	newf->content = con;
-	newf->x = x;
-	newf->y = y;
-	newf->right = NULL;
-	newf->down = NULL;
-
-	field *tmp = anchor;
-	while ( tmp->down != NULL && tmp->down->y <= y)
+	if (x == 0 && y == 0)
 	{
-		tmp = tmp->down;
-	}
-
-	if (tmp->y == y)
-	{
-		while (tmp->right != NULL && tmp->right->x < x)
-		{
-			tmp = tmp->right;
-		}
-		if (tmp->right != NULL)
-		{
-			newf->right = tmp->right;
-		}
-		tmp->right = newf;
+		anchor->content = con;
 	}
 	else
 	{
-		if (tmp->down != NULL)
+		field *newf = new field;
+		newf->content = con;
+		newf->x = x;
+		newf->y = y;
+		newf->right = NULL;
+		newf->down = NULL;
+
+		field *tmp = anchor;
+		field *levelup=NULL;
+		while ( tmp->down != NULL && tmp->down->y <= y)
 		{
-			newf->down = tmp->down;
+			levelup = tmp;
+			tmp = tmp->down;
 		}
-		tmp->down = newf;
+
+		if (tmp->y == y)
+		{
+			while (tmp->right != NULL && tmp->right->x < x)
+			{
+				tmp = tmp->right;
+			}
+
+			if (tmp->x > x)
+			{
+				newf->right = tmp;
+				if (levelup->down->down != NULL)
+					newf->down = levelup->down->down;
+				levelup->down = newf;
+			}
+			else
+			{
+				if (tmp->right != NULL)
+				{
+					newf->right = tmp->right;
+				}
+				tmp->right = newf;
+			}
+		}
+		else
+		{
+			if (tmp->down != NULL)
+			{
+				newf->down = tmp->down;
+			}
+			tmp->down = newf;
+		}
 	}
 }
 
-int Map::findField(field * find)
+void Map::findField(field * find)
 {
-	find->content = '.';
 	field *tmp = anchor;
+	field *levelup = NULL;
 	while (tmp->down != NULL && tmp->down->y <= find->y)
 	{
+		levelup = tmp;
 		tmp = tmp->down;
 	}
 
@@ -234,11 +261,65 @@ int Map::findField(field * find)
 		{
 			tmp = tmp->right;
 		}
+
 		if (tmp->x == find->x)
 		{
-			find->content = tmp->content;
-			return 1;
+			if (tmp->content == '.' && find->content != '.')
+			{
+				tmp->content = find->content;	//paint
+			}
+			else
+			{
+				find->content = tmp->content;	//checkPlace
+				if (tmp->content == 'G')			//delete mushroom
+					tmp->content = '.';
+			}
+		}
+		else
+		{
+			if (find->content != '.')	//add pool
+			{
+				field *pool = new field;
+				pool->x = find->x;
+				pool->y = find->y;
+				pool->content = find->content;
+				pool->right = NULL;
+				pool->down = NULL;
+
+				if (tmp->x > find->x)
+				{
+					pool->right = tmp;
+					if(levelup->down->down != NULL)
+						pool->down = levelup->down->down;
+					levelup->down = pool;
+				}
+				else
+				{
+					if (tmp->right != NULL)
+					{
+						pool->right = tmp->right;
+					}
+					tmp->right = pool;
+				}
+			}
 		}
 	}
-	return 0;
+	else
+	{
+		if (find->content != '.')
+		{
+			field *pool = new field;
+			pool->x = find->x;
+			pool->y = find->y;
+			pool->content = find->content;
+			pool->right = NULL;
+			pool->down = NULL;
+
+			if (tmp->down != NULL)
+			{
+				pool->down = tmp->down;
+			}
+			tmp->down = pool;
+		}
+	}
 }

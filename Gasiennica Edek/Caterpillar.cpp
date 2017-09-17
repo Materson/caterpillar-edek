@@ -1,5 +1,6 @@
 #include "Caterpillar.h"
 #include"Map.h"
+#include<cstdlib>
 
 Caterpillar::Caterpillar()
 {
@@ -28,7 +29,7 @@ Caterpillar::~Caterpillar()
 void Caterpillar::addSegment(segment *head)
 {
 	segment *n = new segment;
-	n->content = ' ';
+	n->content = '.';
 	n->next = head->next;
 	head->next = n;
 	segmentQ++;
@@ -117,6 +118,12 @@ int Caterpillar::move(char x)
 		}
 		break;
 	}
+	/*system("cls");
+	map->printEdekPosition();
+	printSegments();
+	printf_s("\n %c \n", x);
+	map->show();
+	system("pause");*/
 	return 0;
 }
 
@@ -158,4 +165,14 @@ void Caterpillar::delSegment()
 	curr->next = curr->next->next;
 	delete(tmp);
 	segmentQ--;
+}
+
+void Caterpillar::printSegments()
+{
+	segment *tmp = curr;
+	for (int i = 0; i < segmentQ; i++)
+	{
+		printf_s("%c ", tmp->content);
+		tmp = tmp->next;
+	}
 }
