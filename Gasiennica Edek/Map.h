@@ -15,10 +15,19 @@ public:
 	char checkPlace(int x, int y);
 	void printEdekPosition();
 	void paint(int x, int y, char c);
+	void addField(int x, int y, char con);
 private:
 	int w, h;
-	char *area;
 	Caterpillar *Edek;
+
+	struct field
+	{
+		int x, y;
+		char content;
+		field *right;
+		field *down;
+	};
+	field *anchor;
 
 };
 

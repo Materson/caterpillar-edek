@@ -19,7 +19,7 @@ Map::Map(int x, int y, int z)
 		w = 10;
 		h = 10;
 	}*/
-	area = new char[c];
+	//area = new char[c];
 
 	char ch = ' ';
 	int k = 0;
@@ -43,13 +43,13 @@ Map::Map(int x, int y, int z)
 		{
 			for (int j = 0; j < k; j++, i++)
 			{
-				area[i] = ch;
+				//area[i] = ch;
 			}
 			i--;
 		}
 		else
 		{
-			area[i] = ch;
+			//area[i] = ch;
 		}
 
 	}
@@ -66,7 +66,7 @@ void Map::show()
 	for (int i = 0; i < w*h; i++)
 	{
 		
-		printf_s("%c", area[i]);
+		//printf_s("%c", area[i]);
 		
 		if ((i+1) % w == 0)
 		{
@@ -135,7 +135,7 @@ char Map::checkPlace(int x, int y)
 	{
 		return 'T';
 	}
-	return area[y*w + x];
+	return '2';
 }
 
 void Map::printEdekPosition()
@@ -145,5 +145,42 @@ void Map::printEdekPosition()
 
 void Map::paint(int x, int y, char c)
 {
-	area[w*y + x] = c;
+	//area[w*y + x] = c;
+}
+
+void Map::addField(int x, int y, char con)
+{
+	field *newf = new field;
+	newf->content = con;
+	newf->x = x;
+	newf->y = y;
+	newf->right = NULL;
+	newf->down = NULL;
+
+	field *tmp = anchor;
+	while ( tmp->down != NULL && tmp->down->y < y)
+	{
+		tmp = tmp->down;
+	}
+
+	if (tmp->right == NULL)
+	{
+		if (tmp->down != NULL)
+		{
+			newf->down = tmp->down;
+		}
+		tmp->down = newf;
+	}
+	else
+	{
+		while (tmp->right != NULL && tmp->right->x < x)
+		{
+			tmp = tmp->right;
+		}
+		if (tmp->right != NULL)
+		{
+			newf->right = tmp->right;
+		}
+		tmp->right = newf;
+	}
 }
