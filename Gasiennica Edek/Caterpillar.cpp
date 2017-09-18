@@ -119,19 +119,19 @@ int Caterpillar::move(char x)
 		}
 		break;
 	}
-	if(!tmp)
+	//if(!tmp)
 		loop++;
-	if (pos.x == 8 && pos.y == 29)
-	{
+	/*if (pos.x == 8 && pos.y == 29)
+	{*/
 		tmp = 1;
-	system("cls");
-	printf_s("%d\n", loop);
-	map->printEdekPosition();
-	printSegments();
-	printf_s("\n %c \n", x);
-	map->show();
-	system("pause");
-	}
+		system("cls");
+		printf_s("%d\n", loop);
+		map->printEdekPosition();
+		printSegments();
+		printf_s("\n %c \n", x);
+		map->show();
+		system("pause");
+	//}
 	return 0;
 }
 
