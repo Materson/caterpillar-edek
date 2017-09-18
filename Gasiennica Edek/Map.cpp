@@ -8,7 +8,6 @@ Map::Map()
 {
 }
 
-
 Map::Map(int wid, int hei, int z)
 	:w(wid), h(hei)
 {
@@ -40,15 +39,24 @@ Map::Map(int wid, int hei, int z)
 
 		if (k > 0)
 		{
-			for (int j = 0; j < k; j++, i++)
+			if (ch == '.')
 			{
-				if(ch != '.')
-					addField(x, y, ch);
-				x++;
-				if (x == w)
+				x += k;
+				y += x / w;
+				x = x%w;
+				i += k;
+			}
+			else
+			{
+				for (int j = 0; j < k; j++, i++)
 				{
-					y++;
-					x = 0;
+					addField(x, y, ch);
+					x++;
+					if (x == w)
+					{
+						y++;
+						x = 0;
+					}
 				}
 			}
 			i--;
@@ -57,7 +65,7 @@ Map::Map(int wid, int hei, int z)
 		{
 			if (ch != '.')
 				addField(x, y, ch);
-				x++;
+			x++;
 			if (x == w)
 			{
 				y++;
@@ -79,7 +87,7 @@ void Map::show()
 {
 	field *tmp = anchor;
 	field *level = anchor;
-	for (int i = 0; i < h; i++)
+	for (int i = 0; i < 35; i++)
 	{
 		for (int j = 0; j < w; j++)
 		{
@@ -107,16 +115,21 @@ void Map::round()
 {
 	char ch = ' ';
 	scanf_s("%c", &ch);
+	int limit = 0;
+	while(ch != '\n' && limit++ < 3)
+		scanf_s("%c", &ch);
+
 	ch = ' ';
 	int k;
 	while (ch != '\n')
 	{
+		limit = 0;
 		ch = ' ';
 		k = 0;
 		while (ch == ' ')
 		{
 			scanf_s("%c", &ch);
-			while (ch >= '0' && ch <= '9')
+			while (ch >= '0' && ch <= '9' && limit++ < 5)
 			{
 				k += ch - 48;
 				k *= 10;
