@@ -87,40 +87,40 @@ void Map::show()
 {
 	field *tmp = anchor;
 	field *level = anchor;
-	for (int i = 0; i < 38; i++)
+	for (int i = 0; i < h; i++)
 	{
-		for (int j = 0; j < 50; j++)
+		for (int j = 0; j < w; j++)
 		{
-			if (Edek->getX() == j && Edek->getY() == i) //TEST25
-			{
-				printf_s("X");
-			}
-			else
-			{
+			//if (Edek->getX() == j && Edek->getY() == i) //TEST25
+			//{
+			//	printf_s("X");
+			//}
+			//else
+			//{
 				if (tmp->x == j && tmp->y == i)
 				{
-					if (tmp->content == 'K' || tmp->content == 'G' || tmp->content == 'T') //TEST25
-					{
+					//if (tmp->content == 'K' || tmp->content == 'G' || tmp->content == 'T') //TEST25
+					//{
 						printf_s("%c", tmp->content);
 
-					}
-					else
-					{
-						printf_s(".");	//TEST25
-					}
-						/*if (tmp->right != NULL) original
-							tmp = tmp->right;*/
+					//}
+					//else
+					//{
+					//	printf_s(".");	//TEST25
+					//}
+						if (tmp->right != NULL) //original
+							tmp = tmp->right;
 				}
 				else
 				{
 					printf_s(".");
 				}
-			}
-			if (tmp->x == j && tmp->y == i)	//TEST25
-			{
-				if (tmp->right != NULL)
-					tmp = tmp->right;
-			}
+			//}
+			//if (tmp->x == j && tmp->y == i)	//TEST25
+			//{
+			//	if (tmp->right != NULL)
+			//		tmp = tmp->right;
+			//}
 		}
 		printf_s("\n");
 		if (level->y == i && level->down != NULL)

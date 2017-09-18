@@ -34,8 +34,8 @@ void Caterpillar::addSegment(segment *head)
 	head->next = n;
 	segmentQ++;
 }
-int loop = 0;
-int tmp = 0;
+//int loop = 0;
+//int tmp = 0;
 int Caterpillar::move(char x)
 {
 	char p;
@@ -119,19 +119,19 @@ int Caterpillar::move(char x)
 		}
 		break;
 	}
-	//if(!tmp)
-		loop++;
-	/*if (pos.x == 8 && pos.y == 29)
-	{*/
-		tmp = 1;
-		system("cls");
-		printf_s("%d\n", loop);
-		map->printEdekPosition();
-		printSegments();
-		printf_s("\n %c \n", x);
-		map->show();
-		system("pause");
-	//}
+	////if(!tmp)
+	//	loop++;
+	///*if (pos.x == 8 && pos.y == 29)
+	//{*/
+	//	tmp = 1;
+	//	system("cls");
+	//	printf_s("%d\n", loop);
+	//	map->printEdekPosition();
+	//	printSegments();
+	//	printf_s("\n %c \n", x);
+	//	map->show();
+	//	system("pause");
+	////}
 	return 0;
 }
 
