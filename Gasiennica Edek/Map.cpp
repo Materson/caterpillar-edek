@@ -7,10 +7,13 @@ using namespace std;
 Map::Map()
 {
 }
-
+int width = 0;
+int height = 0;
 Map::Map(int wid, int hei, int z)
 	:w(wid), h(hei)
 {
+	width = w;
+	height = h;
 	int c = wid*hei;
 	anchor = new field;
 	anchor->x = 0;
