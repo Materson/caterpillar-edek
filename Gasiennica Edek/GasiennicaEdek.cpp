@@ -3,7 +3,6 @@
 #include"Caterpillar.h"
 
 using namespace std;
-
 int main()
 {
 	int x = 0, y = 0, z = 0;
@@ -14,7 +13,5 @@ int main()
 	map.printEdekPosition();
 	map.show();
 
-
     return 0;
 }
-
