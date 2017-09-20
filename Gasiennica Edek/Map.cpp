@@ -15,12 +15,16 @@ Map::Map(int wid, int hei, int z)
 	width = w;
 	height = h;
 	int c = wid*hei;
-	anchor = new field;
-	anchor->x = 0;
-	anchor->y = 0;
-	anchor->right = NULL;
-	anchor->down = NULL;
-	anchor->content = '.';
+
+	area = new char*[width];
+	for (int i = 0; i < width; i++)
+	{
+		area[i] = new char[height];
+		for (int j = 0; j < height; j++)
+		{
+			area[i][j] = '.';
+		}
+	}
 
 	char ch = ' ';
 	int k = 0, x = 0, y = 0;
@@ -53,7 +57,7 @@ Map::Map(int wid, int hei, int z)
 			{
 				for (int j = 0; j < k; j++, i++)
 				{
-					addField(x, y, ch);
+					area[x][y] = ch;
 					x++;
 					if (x == w)
 					{
@@ -67,7 +71,7 @@ Map::Map(int wid, int hei, int z)
 		else
 		{
 			if (ch != '.')
-				addField(x, y, ch);
+				area[x][y] = ch;
 			x++;
 			if (x == w)
 			{
@@ -75,8 +79,6 @@ Map::Map(int wid, int hei, int z)
 				x = 0;
 			}
 		}
-		
-
 	}
 
 	Edek = new Caterpillar(z, w, h, this);
@@ -88,49 +90,13 @@ Map::~Map()
 
 void Map::show()
 {
-	field *tmp = anchor;
-	field *level = anchor;
-	for (int i = 0; i < h; i++)
+	for (int i = 0; i < height; i++)
 	{
-		for (int j = 0; j < w; j++)
+		for (int j = 0; j < width; j++)
 		{
-			//if (Edek->getX() == j && Edek->getY() == i) //TEST25
-			//{
-			//	printf_s("X");
-			//}
-			//else
-			//{
-				if (tmp->x == j && tmp->y == i)
-				{
-					//if (tmp->content == 'K' || tmp->content == 'G' || tmp->content == 'T') //TEST25
-					//{
-						printf_s("%c", tmp->content);
-
-					//}
-					//else
-					//{
-					//	printf_s(".");	//TEST25
-					//}
-						if (tmp->right != NULL) //original
-							tmp = tmp->right;
-				}
-				else
-				{
-					printf_s(".");
-				}
-			//}
-			//if (tmp->x == j && tmp->y == i)	//TEST25
-			//{
-			//	if (tmp->right != NULL)
-			//		tmp = tmp->right;
-			//}
+			printf_s("%c", area[j][i]);
 		}
 		printf_s("\n");
-		if (level->y == i && level->down != NULL)
-		{
-			tmp = level->down;
-			level = level->down;
-		}
 	}
 }
 

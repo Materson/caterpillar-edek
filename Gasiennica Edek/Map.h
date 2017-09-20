@@ -7,14 +7,7 @@ private:
 	int w, h;
 	Caterpillar *Edek;
 
-	struct field
-	{
-		int x, y;
-		char content;
-		field *right;
-		field *down;
-	};
-	field *anchor;
+	char **area;
 
 public:
 	Map();
@@ -29,7 +22,7 @@ public:
 	void printEdekPosition();
 	void paint(int x, int y, char c);
 	void addField(int x, int y, char con);
-	void findField(field *find);
+	//void findField(field *find);
 
 
 };
