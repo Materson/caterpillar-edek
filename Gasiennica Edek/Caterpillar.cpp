@@ -24,6 +24,10 @@ Caterpillar::Caterpillar(int x, int w, int h, Map *m)
 
 Caterpillar::~Caterpillar()
 {
+	while (segmentQ != 0)
+	{
+		delSegment();
+	}
 }
 
 void Caterpillar::addSegment(segment *head)

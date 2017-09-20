@@ -86,6 +86,12 @@ Map::Map(int wid, int hei, int z)
 
 Map::~Map()
 {
+	for (int i = 0; i < width; i++)
+	{
+		delete[](area[i]);
+	}
+	delete[](area);
+	delete(Edek);
 }
 
 void Map::show()
