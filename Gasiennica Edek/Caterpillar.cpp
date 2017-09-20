@@ -38,7 +38,7 @@ void Caterpillar::addSegment(segment *head)
 	head->next = n;
 	segmentQ++;
 }
-//int loop = 0;
+int loop = 0;
 //int tmp = 0;
 int Caterpillar::move(char x)
 {
@@ -57,7 +57,7 @@ int Caterpillar::move(char x)
 				if (segmentQ == 0)
 				{
 					pos.y++;
-					return 1;
+					return 0;
 				}
 			}
 			curr = curr->next;
@@ -76,7 +76,7 @@ int Caterpillar::move(char x)
 				if (segmentQ == 0)
 				{
 					pos.x--;
-					return 1;
+					return 0;
 				}
 			}
 			curr = curr->next;
@@ -95,7 +95,7 @@ int Caterpillar::move(char x)
 				if (segmentQ == 0)
 				{
 					pos.y--;
-					return 1;
+					return 0;
 				}
 			}
 			curr = curr->next;
@@ -114,7 +114,7 @@ int Caterpillar::move(char x)
 				if (segmentQ == 0)
 				{
 					pos.x++;
-					return 1;
+					return 0;
 				}
 			}
 			curr = curr->next;
@@ -136,7 +136,7 @@ int Caterpillar::move(char x)
 	//	map->show();
 	//	system("pause");
 	////}
-	return 0;
+	return 1;
 }
 
 int Caterpillar::getX()

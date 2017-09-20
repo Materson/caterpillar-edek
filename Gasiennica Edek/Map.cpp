@@ -137,7 +137,7 @@ void Map::round()
 		{
 			for (int i = 0; i < k; i++)
 			{
-				if (Edek->move(ch)) //if TRUE Edek die
+				if (!Edek->move(ch)) // Edek die
 				{
 					printf_s("Zegnaj, okrutny swiecie!\n");
 					ch = '\n';
@@ -146,7 +146,7 @@ void Map::round()
 		}
 		else
 		{
-			if (Edek->move(ch)) //if TRUE Edek die
+			if (!Edek->move(ch)) // Edek die
 			{
 				printf_s("Zegnaj, okrutny swiecie!\n");
 				ch = '\n';
