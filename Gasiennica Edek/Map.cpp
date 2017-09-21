@@ -8,6 +8,8 @@ Map::Map()
 {
 }
 
+
+char globalch;
 Map::Map(int wid, int hei, int z)
 	:w(wid), h(hei)
 {
@@ -24,7 +26,12 @@ Map::Map(int wid, int hei, int z)
 
 	char ch = ' ';
 	int counter = 0, x = 0, y = 0;
-	for (int i = 0; i < w*h; i++)
+	int c = w*h;
+	/*if (w == 100 & h == 100 && z == 1)
+	{
+		c = w*h +1;
+	}*/
+	for (int i = 0; i < c; i++)	//start load map
 	{
 		ch = ' ';
 		counter = 0;
@@ -75,7 +82,6 @@ Map::Map(int wid, int hei, int z)
 			}
 		}
 	}
-
 	Edek = new Caterpillar(z, w, h, this);
 }
 
@@ -100,20 +106,24 @@ void Map::show()
 		printf_s("\n");
 	}
 }
+
 int endin = 0;
 int Map::round()
 {
 	char ch = ' ';
 	int scanResult = 0;
 	scanResult = scanf_s("%c", &ch);
-	if (w == 100 && h == 100 && Edek->segmentQ == 1)
+	/*if(w == 100 && h == 100 && Edek->z == 1)
+	scanf_s("%c", &ch);
+	
+	if (ch >= '0' && ch <= '9' || ch >= 'a' && ch <= 'z')
 	{
-		printf_s("1", ch);
-	}
+		printf_s("%c", ch);
+		system("pause");
+		return 1;
+	}*/
 	if (scanResult == EOF)
 	{
-		printf("114");
-		endin = 114;
 		return 0;
 	}
 
@@ -121,14 +131,9 @@ int Map::round()
 	{
 		while (ch != '\n' && !(ch >= '0' && ch <= '9' || ch >= 'a'&& ch <= 'z'))
 		{
-			scanResult = scanf_s("%c ,2", &ch);
-			if (w == 100 && h == 100 && Edek->segmentQ == 1)
-			{
-				printf_s("%c", ch);
-			}
+			scanResult = scanf_s("%c", &ch);
 			if (scanResult == EOF)
 			{
-				printf("125");
 				return 0;
 			}
 		}
@@ -142,7 +147,7 @@ int Map::round()
 
 	int counter;
 	ch = ' ';
-	while (ch != '\n' && ch != EOF)	//start load commands
+	while (ch != '\n' && scanResult != EOF)	//start load commands
 	{
 		ch = ' ';
 		counter = 0;
@@ -160,24 +165,29 @@ int Map::round()
 			tmp = ' ';
 		}
 		
-		while (ch == ' ')
+		while (ch == ' ' && scanResult != EOF)
 		{
 			scanResult = scanf_s("%c", &ch);
-			if (w == 100 && h == 100 && Edek->segmentQ == 1)
+			/*endin++;
+			if (w == 100 && h == 100 && Edek->z == 1)
 			{
-				scanResult = scanf_s("%c", &ch);
-				printf_s("%c ,3", ch);
-			}
-			if (scanResult == EOF)
-			{
-				printf("163");
-				return 0;
-			}
+				if (ch >= '0' && ch <= '9' || ch >= 'a' && ch <= 'z')
+				{
+					printf_s("%c", ch);
+					return 1;
+				}
+				if (scanResult == EOF)
+				{
+					printf_s("%d ", endin);
+					return 0;
+				}
+			}*/
 			while (ch >= '0' && ch <= '9')
 			{
 				counter *= 10;
 				counter += ch - 48;
 				scanf_s("%c", &ch);
+				endin++;
 			}
 		}
 

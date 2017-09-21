@@ -7,6 +7,7 @@ class Caterpillar
 private:
 	//int segmentQ;
 	Map *map;
+	int segmentQ;
 	
 	struct position
 	{
@@ -26,7 +27,7 @@ private:
 	segment *curr;
 
 public:
-	int segmentQ;
+	int z;
 	Caterpillar();
 	Caterpillar(int x, int w, int h, Map *m);
 	~Caterpillar();

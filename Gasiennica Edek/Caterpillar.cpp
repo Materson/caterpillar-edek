@@ -11,6 +11,7 @@ Caterpillar::Caterpillar(int x, int w, int h, Map *m)
 {
 	pos.x = 0;
 	pos.y = 0;
+	this->z = x;
 	segments = new segment;
 	segments->next = segments;
 	segmentQ = 1;
