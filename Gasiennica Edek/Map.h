@@ -15,7 +15,7 @@ public:
 	~Map();
 
 	void show();
-	void round();
+	int round();
 	int getW();
 	int getH();
 	char checkPlace(int x, int y);

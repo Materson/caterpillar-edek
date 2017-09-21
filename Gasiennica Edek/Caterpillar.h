@@ -1,10 +1,11 @@
 #pragma once
 #include<iostream>
 class Map;
+
 class Caterpillar
 {
 private:
-	int segmentQ;
+	//int segmentQ;
 	Map *map;
 	
 	struct position
@@ -25,6 +26,7 @@ private:
 	segment *curr;
 
 public:
+	int segmentQ;
 	Caterpillar();
 	Caterpillar(int x, int w, int h, Map *m);
 	~Caterpillar();
@@ -37,7 +39,7 @@ public:
 	int getY();
 	void colors(char p);
 	void mushroom(char p);
-	void spike();
+	
 
 };
 

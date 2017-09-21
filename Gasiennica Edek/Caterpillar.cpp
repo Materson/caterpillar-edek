@@ -38,7 +38,7 @@ void Caterpillar::addSegment(segment *head)
 	head->next = n;
 	segmentQ++;
 }
-int loop = 0;
+
 //int tmp = 0;
 int Caterpillar::move(char x)
 {

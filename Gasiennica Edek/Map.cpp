@@ -7,55 +7,50 @@ using namespace std;
 Map::Map()
 {
 }
-int width = 0;
-int height = 0;
+
 Map::Map(int wid, int hei, int z)
 	:w(wid), h(hei)
 {
-	width = w;
-	height = h;
-	int c = wid*hei;
 
-	area = new char*[width];
-	for (int i = 0; i < width; i++)
+	area = new char*[w];
+	for (int i = 0; i < w; i++)
 	{
-		area[i] = new char[height];
-		for (int j = 0; j < height; j++)
+		area[i] = new char[h];
+		for (int j = 0; j < h; j++)
 		{
 			area[i][j] = '.';
 		}
 	}
 
 	char ch = ' ';
-	int k = 0, x = 0, y = 0;
-	for (int i = 0; i < c; i++)
+	int counter = 0, x = 0, y = 0;
+	for (int i = 0; i < w*h; i++)
 	{
 		ch = ' ';
-		k = 0;
+		counter = 0;
 		while (ch == ' ' || ch == '\n')
 		{
 			scanf_s("%c", &ch);
 			while (ch >= '0' && ch <= '9')
 			{
-				k += ch - 48;
-				k *= 10;
+				counter *= 10;
+				counter += ch - 48;
 				scanf_s("%c", &ch);
 			}
 		}
-		k /= 10;
-
-		if (k > 0)
+		
+		if (counter > 0)
 		{
 			if (ch == '.')
 			{
-				x += k;
+				x += counter;
 				y += x / w;
 				x = x%w;
-				i += k;
+				i += counter;
 			}
 			else
 			{
-				for (int j = 0; j < k; j++, i++)
+				for (int j = 0; j < counter; j++, i++)
 				{
 					area[x][y] = ch;
 					x++;
@@ -66,7 +61,7 @@ Map::Map(int wid, int hei, int z)
 					}
 				}
 			}
-			i--;
+			i--;	//remove digit from load
 		}
 		else
 		{
@@ -86,7 +81,7 @@ Map::Map(int wid, int hei, int z)
 
 Map::~Map()
 {
-	for (int i = 0; i < width; i++)
+	for (int i = 0; i < w; i++)
 	{
 		delete[](area[i]);
 	}
@@ -96,46 +91,99 @@ Map::~Map()
 
 void Map::show()
 {
-	for (int i = 0; i < height; i++)
+	for (int i = 0; i < h; i++)
 	{
-		for (int j = 0; j < width; j++)
+		for (int j = 0; j < w; j++)
 		{
 			printf_s("%c", area[j][i]);
 		}
 		printf_s("\n");
 	}
 }
-
-void Map::round()
+int endin = 0;
+int Map::round()
 {
 	char ch = ' ';
-	scanf_s("%c", &ch);
-	int limit = 0;
-	while(ch != '\n' && limit++ < 3)
-		scanf_s("%c", &ch);
-
-	ch = ' ';
-	int k;
-	while (ch != '\n')
+	int scanResult = 0;
+	scanResult = scanf_s("%c", &ch);
+	if (w == 100 && h == 100 && Edek->segmentQ == 1)
 	{
-		limit = 0;
+		printf_s("1", ch);
+	}
+	if (scanResult == EOF)
+	{
+		printf("114");
+		endin = 114;
+		return 0;
+	}
+
+	if (ch == ' ')
+	{
+		while (ch != '\n' && !(ch >= '0' && ch <= '9' || ch >= 'a'&& ch <= 'z'))
+		{
+			scanResult = scanf_s("%c ,2", &ch);
+			if (w == 100 && h == 100 && Edek->segmentQ == 1)
+			{
+				printf_s("%c", ch);
+			}
+			if (scanResult == EOF)
+			{
+				printf("125");
+				return 0;
+			}
+		}
+	}
+
+	char tmp = ' ';
+	if (ch >= '0' && ch <= '9' || ch >= 'a' && ch <= 'z')
+	{
+		tmp = ch;
+	}
+
+	int counter;
+	ch = ' ';
+	while (ch != '\n' && ch != EOF)	//start load commands
+	{
 		ch = ' ';
-		k = 0;
+		counter = 0;
+
+		if (tmp != ' ')
+		{
+			if (tmp >= '0' && tmp <= '9')
+			{
+				counter = tmp - 48;
+			}
+			else
+			{
+				ch = tmp;
+			}
+			tmp = ' ';
+		}
+		
 		while (ch == ' ')
 		{
-			scanf_s("%c", &ch);
-			while (ch >= '0' && ch <= '9' && limit++ < 5)
+			scanResult = scanf_s("%c", &ch);
+			if (w == 100 && h == 100 && Edek->segmentQ == 1)
 			{
-				k += ch - 48;
-				k *= 10;
+				scanResult = scanf_s("%c", &ch);
+				printf_s("%c ,3", ch);
+			}
+			if (scanResult == EOF)
+			{
+				printf("163");
+				return 0;
+			}
+			while (ch >= '0' && ch <= '9')
+			{
+				counter *= 10;
+				counter += ch - 48;
 				scanf_s("%c", &ch);
 			}
 		}
-		k /= 10;
 
-		if (k > 0)
+		if (counter > 0)
 		{
-			for (int i = 0; i < k; i++)
+			for (int i = 0; i < counter; i++)
 			{
 				if (!Edek->move(ch)) // Edek die
 				{
@@ -153,6 +201,7 @@ void Map::round()
 			}
 		}
 	}
+	return 0;
 }
 
 int Map::getW()
