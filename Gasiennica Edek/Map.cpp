@@ -113,7 +113,7 @@ Map::Map(int wid, int hei, int z)
 			}
 		}
 	}
-	Edek = new Caterpillar(z, w, h, this);
+	Edek = new Caterpillar(z, this);
 }
 
 Map::~Map()
@@ -169,7 +169,7 @@ void Map::show()
 		}
 	}
 }
-//int moves = 0;
+
 int Map::round()
 {
 	char ch = ' ';
@@ -233,7 +233,6 @@ int Map::round()
 			{
 				for (int i = 0; i < counter; i++)
 				{
-					//moves++;
 					if (!Edek->move(ch)) // Edek die
 					{
 						printf_s("Zegnaj, okrutny swiecie!\n");
@@ -243,7 +242,6 @@ int Map::round()
 			}
 			else
 			{
-				//moves++;
 				if (!Edek->move(ch)) // Edek die
 				{
 					printf_s("Zegnaj, okrutny swiecie!\n");

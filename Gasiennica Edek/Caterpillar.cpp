@@ -6,12 +6,11 @@ Caterpillar::Caterpillar()
 {
 }
 
-Caterpillar::Caterpillar(int x, int w, int h, Map *m)
+Caterpillar::Caterpillar(int x, Map *m)
 	:map(m)
 {
 	pos.x = 0;
 	pos.y = 0;
-	this->z = x;
 	segments = new segment;
 	segments->content = '.';
 	segments->next = segments;
@@ -83,24 +82,6 @@ int Caterpillar::move(char x)
 		curr = curr->next;
 		colors(p);
 	}
-	/*if (pos.x == 108 && pos.y == 1 && map->getH() == 200 && map->getW() == 200 && z == 2)
-	{
-		if(tmp)
-			system("pause");
-		tmp = 1;
-	}*/
-	////if(!tmp)
-		//loop++;
-	/*if(pos.x == 108 && pos.y == 1)
-	{
-		system("cls");
-		printf_s("%d\n", loop);
-		map->printEdekPosition();
-		printSegments();
-		printf_s("\n %c \n", x);
-		map->show();
-		system("pause");
-	}*/
 	return 1;
 }
 

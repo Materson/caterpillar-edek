@@ -5,7 +5,6 @@ class Map;
 class Caterpillar
 {
 private:
-	//int segmentQ;
 	Map *map;
 	int segmentQ;
 	
@@ -27,9 +26,8 @@ private:
 	segment *curr;
 
 public:
-	int z;
 	Caterpillar();
-	Caterpillar(int x, int w, int h, Map *m);
+	Caterpillar(int x,  Map *m);
 	~Caterpillar();
 
 	void addSegment(segment *head);
