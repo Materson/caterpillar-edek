@@ -109,7 +109,8 @@ int Map::round()
 {
 	char ch = ' ';
 	int scanResult = 0;
-	scanResult = scanf("%c", &ch);
+	//scanResult = scanf("%c", &ch); orig
+	ch = getchar();
 	/*if(w == 100 && h == 100 && Edek->z == 1)
 	scanf_s("%c", &ch);
 	
@@ -119,7 +120,7 @@ int Map::round()
 		system("pause");
 		return 1;
 	}*/
-	if (scanResult == EOF)
+	if (ch == EOF)
 	{
 		return 0;
 	}
@@ -128,8 +129,9 @@ int Map::round()
 	{
 		while (ch != '\n' && !(ch >= '0' && ch <= '9' || ch >= 'a'&& ch <= 'z'))
 		{
-			scanResult = scanf("%c", &ch);
-			if (scanResult == EOF)
+			//scanResult = scanf("%c", &ch);
+			ch = getchar();
+			if (ch == EOF)
 			{
 				return 0;
 			}
@@ -144,7 +146,7 @@ int Map::round()
 
 	int counter;
 	ch = ' ';
-	while (scanResult != EOF)	//start load commands
+	while (ch != EOF)	//start load commands
 	{
 		ch = ' ';
 		counter = 0;
@@ -162,9 +164,10 @@ int Map::round()
 			tmp = ' ';
 		}
 		
-		while (ch == ' ' && scanResult != EOF)
+		while (ch == ' ' && ch != EOF)
 		{
-			scanResult = scanf("%c", &ch);
+			//scanResult = scanf("%c", &ch);
+			ch = getchar();
 			/*endin++;
 			if (w == 100 && h == 100 && Edek->z == 1)
 			{
@@ -183,7 +186,8 @@ int Map::round()
 			{
 				counter *= 10;
 				counter += ch - 48;
-				scanf_s("%c", &ch);
+				//scanf_s("%c", &ch);
+				ch = getchar();
 			}
 		}
 
