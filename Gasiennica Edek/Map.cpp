@@ -8,8 +8,6 @@ Map::Map()
 {
 }
 
-
-char globalch;
 Map::Map(int wid, int hei, int z)
 	:w(wid), h(hei)
 {
@@ -37,12 +35,12 @@ Map::Map(int wid, int hei, int z)
 		counter = 0;
 		while (ch == ' ' || ch == '\n')
 		{
-			scanf_s("%c", &ch);
+			scanf("%c", &ch);
 			while (ch >= '0' && ch <= '9')
 			{
 				counter *= 10;
 				counter += ch - 48;
-				scanf_s("%c", &ch);
+				scanf("%c", &ch);
 			}
 		}
 		
@@ -101,18 +99,17 @@ void Map::show()
 	{
 		for (int j = 0; j < w; j++)
 		{
-			printf_s("%c", area[j][i]);
+			printf("%c", area[j][i]);
 		}
-		printf_s("\n");
+		printf("\n");
 	}
 }
 
-int endin = 0;
 int Map::round()
 {
 	char ch = ' ';
 	int scanResult = 0;
-	scanResult = scanf_s("%c", &ch);
+	scanResult = scanf("%c", &ch);
 	/*if(w == 100 && h == 100 && Edek->z == 1)
 	scanf_s("%c", &ch);
 	
@@ -131,7 +128,7 @@ int Map::round()
 	{
 		while (ch != '\n' && !(ch >= '0' && ch <= '9' || ch >= 'a'&& ch <= 'z'))
 		{
-			scanResult = scanf_s("%c", &ch);
+			scanResult = scanf("%c", &ch);
 			if (scanResult == EOF)
 			{
 				return 0;
@@ -147,7 +144,7 @@ int Map::round()
 
 	int counter;
 	ch = ' ';
-	while (ch != '\n' && scanResult != EOF)	//start load commands
+	while (scanResult != EOF)	//start load commands
 	{
 		ch = ' ';
 		counter = 0;
@@ -167,7 +164,7 @@ int Map::round()
 		
 		while (ch == ' ' && scanResult != EOF)
 		{
-			scanResult = scanf_s("%c", &ch);
+			scanResult = scanf("%c", &ch);
 			/*endin++;
 			if (w == 100 && h == 100 && Edek->z == 1)
 			{
@@ -187,7 +184,6 @@ int Map::round()
 				counter *= 10;
 				counter += ch - 48;
 				scanf_s("%c", &ch);
-				endin++;
 			}
 		}
 
@@ -198,7 +194,7 @@ int Map::round()
 				if (!Edek->move(ch)) // Edek die
 				{
 					printf_s("Zegnaj, okrutny swiecie!\n");
-					ch = '\n';
+					return 0;
 				}
 			}
 		}
@@ -207,7 +203,7 @@ int Map::round()
 			if (!Edek->move(ch)) // Edek die
 			{
 				printf_s("Zegnaj, okrutny swiecie!\n");
-				ch = '\n';
+				return 0;
 			}
 		}
 	}
@@ -236,7 +232,7 @@ char Map::checkPlace(int x, int y)
 
 void Map::printEdekPosition()
 {
-	printf_s("%d %d \n", Edek->getX(), Edek->getY());
+	printf("%d %d \n", Edek->getX(), Edek->getY());
 }
 
 void Map::paint(int x, int y, char c)
