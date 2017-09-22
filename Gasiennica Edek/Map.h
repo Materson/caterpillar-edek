@@ -8,6 +8,7 @@ private:
 	Caterpillar *Edek;
 
 	char **area;
+	char ***areaBig;
 
 public:
 	Map();
@@ -21,9 +22,5 @@ public:
 	char checkPlace(int x, int y);
 	void printEdekPosition();
 	void paint(int x, int y, char c);
-	void addField(int x, int y, char con);
-	//void findField(field *find);
-
-
 };
 

@@ -1,3 +1,4 @@
+#define MAX 1000
 #include "Map.h"
 #include<iostream>
 #include"Caterpillar.h"
@@ -11,14 +12,34 @@ Map::Map()
 Map::Map(int wid, int hei, int z)
 	:w(wid), h(hei)
 {
-
-	area = new char*[w];
-	for (int i = 0; i < w; i++)
+	area = NULL;
+	areaBig = NULL;
+	if (w > 1000)
 	{
-		area[i] = new char[h];
-		for (int j = 0; j < h; j++)
+		areaBig = new char**[w/MAX];
+		for (int i = 0; i < w / MAX; i++)
 		{
-			area[i][j] = '.';
+			areaBig[i] = new char*[MAX];
+			for (int j = 0; j < MAX; j++)
+			{
+				areaBig[i][j] = new char[h];
+				for (int k = 0; k < h; k++)
+				{
+					areaBig[i][j][k] = '.';
+				}
+			}
+		}
+	}
+	else
+	{
+		area = new char*[wid];
+		for (int i = 0; i < w; i++)
+		{
+			area[i] = new char[h];
+			for (int j = 0; j < h; j++)
+			{
+				area[i][j] = '.';
+			}
 		}
 	}
 
@@ -53,7 +74,14 @@ Map::Map(int wid, int hei, int z)
 			{
 				for (int j = 0; j < counter; j++, i++)
 				{
-					area[x][y] = ch;
+					if (area != NULL)
+					{
+						area[x][y] = ch;
+					}
+					else
+					{
+						areaBig[x / MAX][x%MAX][y] = ch;
+					}
 					x++;
 					if (x == w)
 					{
@@ -67,7 +95,16 @@ Map::Map(int wid, int hei, int z)
 		else
 		{
 			if (ch != '.')
-				area[x][y] = ch;
+			{
+				if (area != NULL)
+				{
+					area[x][y] = ch;
+				}
+				else
+				{
+					areaBig[x / MAX][x%MAX][y] = ch;
+				}
+			}
 			x++;
 			if (x == w)
 			{
@@ -81,31 +118,55 @@ Map::Map(int wid, int hei, int z)
 
 Map::~Map()
 {
-	for (int i = 0; i < w; i++)
+	if (area != NULL)
 	{
-		delete[](area[i]);
-	}
+		for (int i = 0; i < w; i++)
+		{
+			delete[](area[i]);
+		}
 	delete[](area);
+	}
+	else
+	{
+		for (int i = 0; i < w / MAX; i++)
+		{
+			for (int j = 0; j < MAX; j++)
+			{
+				delete[](areaBig[i][j]);
+			}
+			delete[](areaBig[i]);
+		}
+		delete[](areaBig);
+	}
 	delete(Edek);
 }
 
 void Map::show()
 {
-	for (int i = 0; i < h; i++)
+	if (area != NULL)
 	{
-		for (int j = 0; j < w; j++)
+		for (int i = 0; i < h; i++)
 		{
-			/*if (j == Edek->getX() && i == Edek->getY())
+			for (int j = 0; j < w; j++)
 			{
-				printf("X");
+				printf("%c", area[j][i]);
 			}
-			else
-			{*/
-			printf("%c", area[j][i]);
-
-			//}
+			printf("\n");
 		}
-		printf("\n");
+	}
+	else
+	{
+		for (int i = 0; i < h; i++)
+		{
+			for (int j = 0; j < w / MAX; j++)
+			{
+				for (int k = 0; k < MAX; k++)
+				{
+					printf("%c", areaBig[j][k][i]);
+				}
+			}
+			printf("\n");
+		}
 	}
 }
 //int moves = 0;
@@ -212,7 +273,14 @@ char Map::checkPlace(int x, int y)
 		return 'T';
 	}
 	
-	return area[x][y];
+	if (area != NULL)
+	{
+		return area[x][y];
+	}
+	else
+	{
+		return areaBig[x / MAX][x%MAX][y];
+	}
 }
 
 void Map::printEdekPosition()
@@ -222,5 +290,12 @@ void Map::printEdekPosition()
 
 void Map::paint(int x, int y, char c)
 {
-	area[x][y] = c;
+	if (area != NULL)
+	{
+		area[x][y] = c;
+	}
+	else
+	{
+		areaBig[x / MAX][x%MAX][y] = c;
+	}
 }
