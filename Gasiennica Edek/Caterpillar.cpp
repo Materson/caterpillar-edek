@@ -40,7 +40,6 @@ void Caterpillar::addSegment(segment *head)
 	segmentQ++;
 }
 
-//int tmp = 0;
 int Caterpillar::move(char x)
 {
 	char p;
@@ -83,19 +82,26 @@ int Caterpillar::move(char x)
 		curr = curr->next;
 		colors(p);
 	}
+	/*if (pos.x == 108 && pos.y == 1 && map->getH() == 200 && map->getW() == 200 && z == 2)
+	{
+		if(tmp)
+			system("pause");
+		tmp = 1;
+	}*/
 	////if(!tmp)
-	//	loop++;
-	///*if (pos.x == 8 && pos.y == 29)
+		//loop++;
 	//{*/
-	//	tmp = 1;
-	//	system("cls");
-	//	printf_s("%d\n", loop);
-	//	map->printEdekPosition();
-	//	printSegments();
-	//	printf_s("\n %c \n", x);
-	//	map->show();
-	//	system("pause");
-	////}
+	
+	/*if (loop > 73113)
+	{
+		system("cls");
+		printf_s("%d\n", loop);
+		map->printEdekPosition();
+		printSegments();
+		printf_s("\n %c \n", x);
+		map->show();
+		system("pause");
+	}*/
 	return 1;
 }
 
