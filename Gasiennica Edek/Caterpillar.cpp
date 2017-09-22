@@ -44,85 +44,44 @@ void Caterpillar::addSegment(segment *head)
 int Caterpillar::move(char x)
 {
 	char p;
+	int dx = 0, dy = 0;
 	switch (x)
 	{
 	case 'g':
-		p = map->checkPlace(pos.x, pos.y - 1);
-		if (p != 'T')
-		{
-			pos.y--;
-			mushroom(p);
-			if (p == 'K')
-			{
-				delSegment();
-				if (segmentQ == 0)
-				{
-					pos.y++;
-					return 0;
-				}
-			}
-			curr = curr->next;
-			colors(p);
-		}
+		dx = 0;
+		dy = -1;
 		break;
 	case 'p':
-		p = map->checkPlace(pos.x + 1, pos.y);
-		if (p != 'T')
-		{
-			pos.x++;
-			mushroom(p);
-			if (p == 'K')
-			{
-				delSegment();
-				if (segmentQ == 0)
-				{
-					pos.x--;
-					return 0;
-				}
-			}
-			curr = curr->next;
-			colors(p);
-		}
+		dx = 1;
+		dy = 0;
 		break;
 	case 'd':
-		p = map->checkPlace(pos.x, pos.y + 1);
-		if (p != 'T')
-		{
-			pos.y++;
-			mushroom(p);
-			if (p == 'K')
-			{
-				delSegment();
-				if (segmentQ == 0)
-				{
-					pos.y--;
-					return 0;
-				}
-			}
-			curr = curr->next;
-			colors(p);
-		}
+		dx = 0;
+		dy = 1;
 		break;
 	case 'l':
-		p = map->checkPlace(pos.x - 1, pos.y);
-		if (p != 'T')
-		{
-			pos.x--;
-			mushroom(p);
-			if (p == 'K')
-			{
-				delSegment();
-				if (segmentQ == 0)
-				{
-					pos.x++;
-					return 0;
-				}
-			}
-			curr = curr->next;
-			colors(p);
-			
-		}
+		dx = -1;
+		dy = 0;
 		break;
+	}
+	p = map->checkPlace(pos.x + dx, pos.y + dy);
+	if (p != 'T')
+	{
+		pos.x += dx;
+		pos.y += dy;
+		mushroom(p);
+		if (p == 'K')
+		{
+			delSegment();
+			if (segmentQ == 0)
+			{
+				pos.x -= dx;
+				pos.y -= dy;
+				return 0;
+			}
+		}
+		curr = curr->next;
+		colors(p);
 	}
 	////if(!tmp)
 	//	loop++;

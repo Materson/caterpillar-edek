@@ -104,7 +104,7 @@ void Map::show()
 		printf("\n");
 	}
 }
-
+int moves = 0;
 int Map::round()
 {
 	char ch = ' ';
@@ -190,11 +190,23 @@ int Map::round()
 				ch = getchar();
 			}
 		}
-
-		if (counter > 0)
+		if (ch != '\n' && ch != EOF)
 		{
-			for (int i = 0; i < counter; i++)
+			if (counter > 0)
 			{
+				for (int i = 0; i < counter; i++)
+				{
+					moves++;
+					if (!Edek->move(ch)) // Edek die
+					{
+						printf_s("Zegnaj, okrutny swiecie!\n");
+						return 0;
+					}
+				}
+			}
+			else
+			{
+				moves++;
 				if (!Edek->move(ch)) // Edek die
 				{
 					printf_s("Zegnaj, okrutny swiecie!\n");
@@ -202,14 +214,7 @@ int Map::round()
 				}
 			}
 		}
-		else
-		{
-			if (!Edek->move(ch)) // Edek die
-			{
-				printf_s("Zegnaj, okrutny swiecie!\n");
-				return 0;
-			}
-		}
+
 	}
 	return 0;
 }
