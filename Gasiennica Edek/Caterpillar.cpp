@@ -13,6 +13,7 @@ Caterpillar::Caterpillar(int x, int w, int h, Map *m)
 	pos.y = 0;
 	this->z = x;
 	segments = new segment;
+	segments->content = '.';
 	segments->next = segments;
 	segmentQ = 1;
 	for (int i = 1; i < x; i++)
@@ -90,9 +91,7 @@ int Caterpillar::move(char x)
 	}*/
 	////if(!tmp)
 		//loop++;
-	//{*/
-	
-	/*if (loop > 73113)
+	/*if(pos.x == 108 && pos.y == 1)
 	{
 		system("cls");
 		printf_s("%d\n", loop);
