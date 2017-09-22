@@ -35,12 +35,12 @@ Map::Map(int wid, int hei, int z)
 		counter = 0;
 		while (ch == ' ' || ch == '\n')
 		{
-			scanf("%c", &ch);
+			ch = getchar();
 			while (ch >= '0' && ch <= '9')
 			{
 				counter *= 10;
 				counter += ch - 48;
-				scanf("%c", &ch);
+				ch = getchar();
 			}
 		}
 		
